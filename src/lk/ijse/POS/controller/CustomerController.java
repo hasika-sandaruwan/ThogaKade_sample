@@ -13,15 +13,29 @@ public class CustomerController {
                 "jdbc:mysql://localhost:3306/ThogaKade", "root", "mysql");
         String query = "INSERT INTO Customer VALUES (?,?,?,?)";
         PreparedStatement stm = con.prepareStatement(query);
-        stm.setObject(1,c.getId());
-        stm.setObject(2,c.getName());
-        stm.setObject(3,c.getAddress());
-        stm.setObject(4,c.getSalary());
+        stm.setObject(1, c.getId());
+        stm.setObject(2, c.getName());
+        stm.setObject(3, c.getAddress());
+        stm.setObject(4, c.getSalary());
         return stm.executeUpdate() > 0;
 
     }
 
-    public Customer searchCustomer(String id) {
+    public Customer searchCustomer(String id) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/ThogaKade", "root", "mysql");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM Customer WHERE id=?");
+        stm.setObject(1, id);
+        ResultSet rst = stm.executeQuery();
+        if (rst.next()) {
+            return new Customer(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getDouble("salary")
+            );
+        }
         return null;
     }
 
