@@ -10,16 +10,12 @@ import java.io.IOException;
 public class DashBoardFormController {
 
     public void openSaveCustomerOnAction(ActionEvent actionEvent) throws IOException {
-        Scene scene =
-                new Scene(FXMLLoader.load(getClass()
-                        .getResource("../view/CustomerSaveForm.fxml")));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        setUi("CustomerSaveForm");
 
     }
 
-    public void openSearchCustomerOnAction(ActionEvent actionEvent) {
+    public void openSearchCustomerOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("CustomerSearchForm");
     }
 
     public void openUpdateCustomerOnAction(ActionEvent actionEvent) {
@@ -33,4 +29,14 @@ public class DashBoardFormController {
 
     public void openPlaceOrderOnAction(ActionEvent actionEvent) {
     }
+
+    void setUi(String location) throws IOException {
+        Scene scene =
+                new Scene(FXMLLoader.load(getClass()
+                        .getResource("../view/"+location+".fxml")));
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 }
