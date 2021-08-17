@@ -32,14 +32,18 @@ public class CustomerController {
     }
 
     public Customer searchCustomer(String id) {
+        return null;
     }
 
     public boolean updateCustomer(Customer c) {
+        return false;
     }
 
     public boolean deleteCustomer(String id) {
+        return false;
     }
 
     public ArrayList<Customer> getAllCustomers() {
+        return null;
     }
 }
