@@ -53,8 +53,16 @@ public class CustomerController {
         return stm.executeUpdate()>0;
     }
 
-    public boolean deleteCustomer(String id) {
-        return false;
+    public boolean deleteCustomer(String id) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager
+                .getConnection("jdbc:mysql://localhost:3306/ThogaKade",
+                        "root","mysql");
+        PreparedStatement stm = connection.prepareStatement(
+                "DELETE FROM Customer WHERE id=?"
+        );
+        stm.setObject(1,id);
+        return stm.executeUpdate()>0;
     }
 
     public ArrayList<Customer> getAllCustomers() {
