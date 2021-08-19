@@ -22,7 +22,8 @@ public class DashBoardFormController {
         setUi("CustomerUpdateForm");
     }
 
-    public void openDeleteCustomerOnAction(ActionEvent actionEvent) {
+    public void openDeleteCustomerOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("CustomerDeleteForm");
     }
 
     public void opengetAllCustomerOnAction(ActionEvent actionEvent) {
