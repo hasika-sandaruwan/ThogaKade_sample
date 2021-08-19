@@ -2,6 +2,7 @@ package lk.ijse.POS.controller;
 
 import lk.ijse.POS.model.Customer;
 
+import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -43,29 +44,43 @@ public class CustomerController {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager
                 .getConnection("jdbc:mysql://localhost:3306/ThogaKade",
-                        "root","mysql");
-        PreparedStatement stm =connection.
+                        "root", "mysql");
+        PreparedStatement stm = connection.
                 prepareStatement("UPDATE Customer SET name=?, address=?, salary=? WHERE id=?");
-        stm.setObject(1,c.getName());
-        stm.setObject(2,c.getAddress());
-        stm.setObject(3,c.getSalary());
-        stm.setObject(4,c.getId());
-        return stm.executeUpdate()>0;
+        stm.setObject(1, c.getName());
+        stm.setObject(2, c.getAddress());
+        stm.setObject(3, c.getSalary());
+        stm.setObject(4, c.getId());
+        return stm.executeUpdate() > 0;
     }
 
     public boolean deleteCustomer(String id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager
                 .getConnection("jdbc:mysql://localhost:3306/ThogaKade",
-                        "root","mysql");
+                        "root", "mysql");
         PreparedStatement stm = connection.prepareStatement(
                 "DELETE FROM Customer WHERE id=?"
         );
-        stm.setObject(1,id);
-        return stm.executeUpdate()>0;
+        stm.setObject(1, id);
+        return stm.executeUpdate() > 0;
     }
 
-    public ArrayList<Customer> getAllCustomers() {
-        return null;
+    public ArrayList<Customer> getAllCustomers() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ThogaKade","root", "mysql");
+        PreparedStatement stm = connection.prepareStatement
+                ("SELECT * FROM Customer");
+        ArrayList<Customer> customerArray= new ArrayList();
+        ResultSet rst = stm.executeQuery();
+        while (rst.next()){
+            customerArray.add(
+                    new Customer(
+                            rst.getString(1),rst.getString(2),
+                            rst.getString(3),rst.getDouble("salary")
+                    )
+            );
+        }
+        return customerArray;
     }
 }

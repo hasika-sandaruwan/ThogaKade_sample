@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.POS.controller.CustomerListFormController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Customers List">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="43.0" prefHeight="6.0" prefWidth="575.0" />
+      <TableView fx:id="tblCustomer" layoutX="14.0" layoutY="61.0" prefHeight="332.0" prefWidth="575.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="102.0" text="Customer Id" />
+          <TableColumn fx:id="colName" prefWidth="133.0" text="Customer Name" />
+            <TableColumn fx:id="colAddress" prefWidth="166.0" text="Customer Address" />
+            <TableColumn fx:id="colSalary" prefWidth="172.0" text="Customer Salary" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
