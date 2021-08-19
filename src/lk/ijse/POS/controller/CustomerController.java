@@ -39,8 +39,18 @@ public class CustomerController {
         return null;
     }
 
-    public boolean updateCustomer(Customer c) {
-        return false;
+    public boolean updateCustomer(Customer c) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager
+                .getConnection("jdbc:mysql://localhost:3306/ThogaKade",
+                        "root","mysql");
+        PreparedStatement stm =connection.
+                prepareStatement("UPDATE Customer SET name=?, address=?, salary=? WHERE id=?");
+        stm.setObject(1,c.getName());
+        stm.setObject(2,c.getAddress());
+        stm.setObject(3,c.getSalary());
+        stm.setObject(4,c.getId());
+        return stm.executeUpdate()>0;
     }
 
     public boolean deleteCustomer(String id) {
