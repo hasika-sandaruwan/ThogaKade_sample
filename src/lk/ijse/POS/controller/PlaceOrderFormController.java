@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.POS.model.Customer;
 import lk.ijse.POS.model.Item;
 import lk.ijse.POS.view.tm.CartTM;
@@ -30,6 +31,15 @@ public class PlaceOrderFormController {
     public TableColumn colOption;
 
     public void initialize() throws SQLException, ClassNotFoundException {
+
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colQTY.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
+
+
         loadCustomerIds();
         loadItemCodes();
 
@@ -80,6 +90,11 @@ public class PlaceOrderFormController {
         cmbCustomerId.setItems(obList);
     }
 
+
+
+
+    ObservableList<CartTM> obList = FXCollections.observableArrayList();
+
     public void addToCartOnAction(ActionEvent actionEvent) {
 
         double unitPrice = Double.parseDouble(txtUnitPrice.getText());
@@ -96,6 +111,11 @@ public class PlaceOrderFormController {
                 total,
                 btn
         );
+
+
+        obList.add(tm);
+
+        tblCart.setItems(obList);
 
     }
 }
