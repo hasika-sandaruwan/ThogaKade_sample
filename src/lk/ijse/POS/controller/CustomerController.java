@@ -48,4 +48,14 @@ public class CustomerController {
         }
         return customerArray;
     }
+
+    public ArrayList<String> getAllCustomerIds() throws SQLException, ClassNotFoundException {
+        ArrayList<String> ids = new ArrayList<>();
+        ResultSet rst = CrudUtil.execute("SELECT id FROM Customer");
+        while (rst.next()){
+            ids.add(rst.getString(1));
+        }
+        return ids;
+    }
+
 }

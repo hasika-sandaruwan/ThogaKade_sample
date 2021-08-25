@@ -30,7 +30,8 @@ public class DashBoardFormController {
         setUi("CustomerListForm");
     }
 
-    public void openPlaceOrderOnAction(ActionEvent actionEvent) {
+    public void openPlaceOrderOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("PlaceOrderForm");
     }
 
     void setUi(String location) throws IOException {
