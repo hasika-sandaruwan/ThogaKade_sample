@@ -192,7 +192,7 @@ public class PlaceOrderFormController {
 
     }
 
-    public void placeOrder(ActionEvent actionEvent) {
+    public void placeOrder(ActionEvent actionEvent) throws SQLException {
 
         ArrayList<ItemsDetail> items = new ArrayList<>();
 
