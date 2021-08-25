@@ -7,9 +7,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.POS.model.Customer;
 import lk.ijse.POS.model.Item;
+import lk.ijse.POS.model.ItemsDetail;
+import lk.ijse.POS.model.Order;
 import lk.ijse.POS.view.tm.CartTM;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class PlaceOrderFormController {
     public ComboBox<String> cmbCustomerId;
@@ -30,6 +35,7 @@ public class PlaceOrderFormController {
     public TableColumn colTotal;
     public TableColumn colOption;
     public Label txtTotalCost;
+    public Label lblDate;
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -43,6 +49,7 @@ public class PlaceOrderFormController {
 
         loadCustomerIds();
         loadItemCodes();
+        setDate();
 
         //-----------------------------------------------------
 
@@ -63,6 +70,10 @@ public class PlaceOrderFormController {
                         e.printStackTrace();
                     }
                 });
+    }
+
+    private void setDate() {
+        lblDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
     }
 
     private void setItemData(String id) throws SQLException, ClassNotFoundException {
@@ -165,5 +176,26 @@ public class PlaceOrderFormController {
         }
         txtTotalCost.setText(": "+totalCost+" LKR");
 
+    }
+
+    public void placeOrder(ActionEvent actionEvent) {
+
+        ArrayList<ItemsDetail> items = new ArrayList<>();
+
+        for (CartTM temp :obList
+             ) {
+            items.add(
+                    new ItemsDetail(temp.getCode(),temp.getDescription(),temp.getUnitPrice(), temp.getQty())
+            );
+        }
+
+        Order order = new Order("D021",
+                lblDate.getText(),cmbCustomerId.getValue(),items);
+
+        if (new OrderController().placeOrder(order)){
+            new Alert(Alert.AlertType.CONFIRMATION, "Saved").show();
+        }else{
+            new Alert(Alert.AlertType.WARNING, "Try Again").show();
+        }
     }
 }

@@ -51,12 +51,10 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Button layoutX="679.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Place Order" />
+      <Button layoutX="679.0" layoutY="368.0" mnemonicParsing="false" onAction="#placeOrder" prefHeight="25.0" prefWidth="97.0" text="Place Order" />
       <Label layoutX="12.0" layoutY="34.0" text="Order Id :" textFill="#1600a4" />
       <Label layoutX="80.0" layoutY="34.0" text="D-001" textFill="#1600a4" />
-      <Label layoutX="263.0" layoutY="34.0" text="Date :" textFill="#1600a4" />
-      <Label layoutX="301.0" layoutY="34.0" text="D-001" textFill="#1600a4" />
-      <Label layoutX="490.0" layoutY="34.0" text="Time :" textFill="#1600a4" />
-      <Label layoutX="538.0" layoutY="34.0" text="D-001" textFill="#1600a4" />
+      <Label layoutX="571.0" layoutY="34.0" text="Date :" textFill="#1600a4" />
+      <Label fx:id="lblDate" layoutX="609.0" layoutY="34.0" text="D-001" textFill="#1600a4" />
    </children>
 </AnchorPane>
