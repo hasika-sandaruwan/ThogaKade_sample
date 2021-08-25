@@ -50,7 +50,7 @@ public class PlaceOrderFormController {
                     try {
                         setCustomerData(newValue);
                     } catch (Exception e) {
-                       e.printStackTrace();
+                        e.printStackTrace();
                     }
                 });
 
@@ -79,18 +79,16 @@ public class PlaceOrderFormController {
     }
 
     private void loadItemCodes() throws SQLException, ClassNotFoundException {
-        ObservableList<String> obList= FXCollections.observableArrayList
+        ObservableList<String> obList = FXCollections.observableArrayList
                 (new ItemController().getAllItemCodes());
         cmbItemCode.setItems(obList);
     }
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {
-        ObservableList<String> obList= FXCollections.observableArrayList
+        ObservableList<String> obList = FXCollections.observableArrayList
                 (new CustomerController().getAllCustomerIds());
         cmbCustomerId.setItems(obList);
     }
-
-
 
 
     ObservableList<CartTM> obList = FXCollections.observableArrayList();
@@ -99,7 +97,7 @@ public class PlaceOrderFormController {
 
         double unitPrice = Double.parseDouble(txtUnitPrice.getText());
         int qtyForCustomer = Integer.parseInt(txtQtyForOrder.getText());
-        double total = unitPrice*qtyForCustomer;
+        double total = unitPrice * qtyForCustomer;
 
         Button btn = new Button("Delete");
 
@@ -112,10 +110,29 @@ public class PlaceOrderFormController {
                 btn
         );
 
+        btn.setOnAction((e)->{
+            obList.remove(tm);
+            tblCart.refresh();
+        });
 
-        obList.add(tm);
+        int rowNumber = isExists(tm);
 
-        tblCart.setItems(obList);
+        if (rowNumber==-1){
+            obList.add(tm);
+            tblCart.setItems(obList);
+        }else{
+            obList.get(rowNumber).setQty(obList.get(rowNumber).getQty()+qtyForCustomer);
+            obList.get(rowNumber).setTotal(obList.get(rowNumber).getTotal()+total);
+            tblCart.refresh();
+        }
+    }
 
+    private int isExists(CartTM tm) {
+        for (int i = 0; i < obList.size(); i++) {
+            if (obList.get(i).getCode().equals(tm.getCode())) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
