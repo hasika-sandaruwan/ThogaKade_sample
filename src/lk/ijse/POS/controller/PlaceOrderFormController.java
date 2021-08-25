@@ -12,6 +12,13 @@ public class PlaceOrderFormController {
 
     public void initialize() throws SQLException, ClassNotFoundException {
         loadCustomerIds();
+        loadItemCodes();
+    }
+
+    private void loadItemCodes() throws SQLException, ClassNotFoundException {
+        ObservableList<String> obList= FXCollections.observableArrayList
+                (new IteController().getAllItemCodes());
+        cmbItemCode.setItems(obList);
     }
 
     private void loadCustomerIds() throws SQLException, ClassNotFoundException {
