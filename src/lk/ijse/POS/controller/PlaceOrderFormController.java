@@ -36,6 +36,7 @@ public class PlaceOrderFormController {
     public TableColumn colOption;
     public Label txtTotalCost;
     public Label lblDate;
+    public Label lblOrderId;
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -50,6 +51,7 @@ public class PlaceOrderFormController {
         loadCustomerIds();
         loadItemCodes();
         setDate();
+        setOrderId();
 
         //-----------------------------------------------------
 
@@ -70,6 +72,18 @@ public class PlaceOrderFormController {
                         e.printStackTrace();
                     }
                 });
+    }
+
+    private void setOrderId() {
+        try {
+
+            lblOrderId.setText(new OrderController().generateOrderId());
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setDate() {
@@ -189,7 +203,7 @@ public class PlaceOrderFormController {
             );
         }
 
-        Order order = new Order("D023",
+        Order order = new Order(lblOrderId.getText(),
                 lblDate.getText(),cmbCustomerId.getValue(),items);
 
         if (new OrderController().placeOrder(order)){

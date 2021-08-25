@@ -5,17 +5,17 @@ import java.util.Objects;
 public class Item {
     private String code;
     private String description;
-    private int qtyOnHand;
     private double untPrice;
+    private int qtyOnHand;
 
     public Item() {
     }
 
-    public Item(String code, String description, int qtyOnHand, double untPrice) {
+    public Item(String code, String description, double untPrice, int qtyOnHand) {
         this.code = code;
         this.description = description;
-        this.qtyOnHand = qtyOnHand;
         this.untPrice = untPrice;
+        this.qtyOnHand = qtyOnHand;
     }
 
     public String getCode() {

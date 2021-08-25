@@ -24,8 +24,8 @@ public class ItemController {
             return new Item(
                     rst.getString(1),
                     rst.getString(2),
-                    rst.getInt(3),
-                    rst.getDouble(4)
+                    rst.getDouble(3),
+                    rst.getInt(4)
             );
         }
         return null;
