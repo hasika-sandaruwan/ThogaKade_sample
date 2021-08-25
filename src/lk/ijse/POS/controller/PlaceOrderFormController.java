@@ -189,7 +189,7 @@ public class PlaceOrderFormController {
             );
         }
 
-        Order order = new Order("D021",
+        Order order = new Order("D023",
                 lblDate.getText(),cmbCustomerId.getValue(),items);
 
         if (new OrderController().placeOrder(order)){
