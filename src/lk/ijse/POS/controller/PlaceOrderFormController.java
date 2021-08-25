@@ -118,12 +118,24 @@ public class PlaceOrderFormController {
         int rowNumber = isExists(tm);
 
         if (rowNumber==-1){
-            obList.add(tm);
-            tblCart.setItems(obList);
+
+            if (Integer.parseInt(txtQtyOnHand.getText())>=qtyForCustomer){
+                obList.add(tm);
+                tblCart.setItems(obList);
+            }else{
+                new Alert(Alert.AlertType.WARNING, "Invalid QTY").show();
+            }
         }else{
-            obList.get(rowNumber).setQty(obList.get(rowNumber).getQty()+qtyForCustomer);
-            obList.get(rowNumber).setTotal(obList.get(rowNumber).getTotal()+total);
-            tblCart.refresh();
+
+            if (Integer.parseInt(txtQtyOnHand.getText())>=(obList.get(rowNumber).getQty()+qtyForCustomer)){
+                obList.get(rowNumber).setQty(obList.get(rowNumber).getQty()+qtyForCustomer);
+                obList.get(rowNumber).setTotal(obList.get(rowNumber).getTotal()+total);
+                tblCart.refresh();
+            }else{
+                new Alert(Alert.AlertType.WARNING, "Invalid QTY").show();
+            }
+
+
         }
     }
 
