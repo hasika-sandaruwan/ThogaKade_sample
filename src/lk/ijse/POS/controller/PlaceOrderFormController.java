@@ -29,6 +29,7 @@ public class PlaceOrderFormController {
     public TableColumn colQTY;
     public TableColumn colTotal;
     public TableColumn colOption;
+    public Label txtTotalCost;
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -110,33 +111,38 @@ public class PlaceOrderFormController {
                 btn
         );
 
-        btn.setOnAction((e)->{
+        btn.setOnAction((e) -> {
             obList.remove(tm);
             tblCart.refresh();
+            calculateTotal();
         });
 
         int rowNumber = isExists(tm);
 
-        if (rowNumber==-1){
+        if (rowNumber == -1) {
 
-            if (Integer.parseInt(txtQtyOnHand.getText())>=qtyForCustomer){
+            if (Integer.parseInt(txtQtyOnHand.getText()) >= qtyForCustomer) {
                 obList.add(tm);
                 tblCart.setItems(obList);
-            }else{
+            } else {
                 new Alert(Alert.AlertType.WARNING, "Invalid QTY").show();
             }
-        }else{
+        } else {
 
-            if (Integer.parseInt(txtQtyOnHand.getText())>=(obList.get(rowNumber).getQty()+qtyForCustomer)){
-                obList.get(rowNumber).setQty(obList.get(rowNumber).getQty()+qtyForCustomer);
-                obList.get(rowNumber).setTotal(obList.get(rowNumber).getTotal()+total);
+            if (Integer.parseInt(txtQtyOnHand.getText()) >= (obList.get(rowNumber).getQty() + qtyForCustomer)) {
+                obList.get(rowNumber).setQty(obList.get(rowNumber).getQty() + qtyForCustomer);
+                obList.get(rowNumber).setTotal(obList.get(rowNumber).getTotal() + total);
                 tblCart.refresh();
-            }else{
+            } else {
                 new Alert(Alert.AlertType.WARNING, "Invalid QTY").show();
             }
+
 
 
         }
+
+        calculateTotal();
+
     }
 
     private int isExists(CartTM tm) {
@@ -146,5 +152,18 @@ public class PlaceOrderFormController {
             }
         }
         return -1;
+    }
+
+
+    double totalCost = 0.0;
+
+    private void calculateTotal() {
+        totalCost = 0;
+        for (CartTM temp : obList
+        ) {
+            totalCost += temp.getTotal();
+        }
+        txtTotalCost.setText(": "+totalCost+" LKR");
+
     }
 }
