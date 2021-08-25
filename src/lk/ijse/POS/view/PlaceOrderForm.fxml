@@ -20,9 +20,9 @@
       </Label>
       <Separator layoutX="14.0" layoutY="27.0" prefHeight="3.0" prefWidth="771.0" />
       <ComboBox fx:id="cmbCustomerId" layoutX="14.0" layoutY="77.0" prefWidth="150.0" promptText="Customer Id" />
-      <TextField editable="false" layoutX="174.0" layoutY="77.0" prefHeight="25.0" prefWidth="160.0" promptText="Name" />
-      <TextField editable="false" layoutX="338.0" layoutY="77.0" prefHeight="25.0" prefWidth="284.0" promptText="Address" />
-      <TextField editable="false" layoutX="629.0" layoutY="77.0" promptText="Salary" />
+      <TextField fx:id="txtName" editable="false" layoutX="174.0" layoutY="77.0" prefHeight="25.0" prefWidth="160.0" promptText="Name" />
+      <TextField fx:id="txtAddress" editable="false" layoutX="338.0" layoutY="77.0" prefHeight="25.0" prefWidth="284.0" promptText="Address" />
+      <TextField fx:id="txtSalary" editable="false" layoutX="629.0" layoutY="77.0" promptText="Salary" />
       <Separator layoutX="14.0" layoutY="109.0" prefHeight="3.0" prefWidth="434.0" />
       <ComboBox fx:id="cmbItemCode" layoutX="14.0" layoutY="121.0" prefWidth="150.0" promptText="Item Code" />
       <TextField editable="false" layoutX="174.0" layoutY="121.0" prefHeight="25.0" prefWidth="228.0" promptText="Description" />
