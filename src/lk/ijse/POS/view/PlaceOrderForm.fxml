@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="404.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.POS.controller.PlaceOrderFormController">
    <children>
       <Label alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="792.0" text="Place Order Form">
@@ -29,18 +28,18 @@
       <TextField fx:id="txtQtyOnHand" editable="false" layoutX="409.0" layoutY="121.0" prefHeight="25.0" prefWidth="97.0" promptText="Qty On Hand" />
       <TextField fx:id="txtUnitPrice" editable="false" layoutX="512.0" layoutY="121.0" prefHeight="25.0" prefWidth="118.0" promptText="Unit Price" />
       <Separator layoutX="636.0" layoutY="114.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="2.0" />
-      <TextField layoutX="652.0" layoutY="121.0" prefHeight="25.0" prefWidth="126.0" promptText="QTY" />
-      <TableView layoutX="14.0" layoutY="184.0" prefHeight="175.0" prefWidth="762.0">
+      <TextField fx:id="txtQtyForOrder" layoutX="652.0" layoutY="121.0" prefHeight="25.0" prefWidth="126.0" promptText="QTY" />
+      <TableView fx:id="tblCart" layoutX="14.0" layoutY="184.0" prefHeight="175.0" prefWidth="762.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Item Code" />
-          <TableColumn prefWidth="145.0" text="Description" />
-            <TableColumn prefWidth="111.0" text="Unit Price" />
-            <TableColumn prefWidth="95.0" text="QTY" />
-            <TableColumn prefWidth="175.0" text="Total" />
-            <TableColumn prefWidth="160.0" text="Option" />
+          <TableColumn fx:id="colItemCode" prefWidth="75.0" text="Item Code" />
+          <TableColumn fx:id="colDescription" prefWidth="145.0" text="Description" />
+            <TableColumn fx:id="colUnitPrice" prefWidth="111.0" text="Unit Price" />
+            <TableColumn fx:id="colQTY" prefWidth="95.0" text="QTY" />
+            <TableColumn fx:id="colTotal" prefWidth="175.0" text="Total" />
+            <TableColumn fx:id="colOption" prefWidth="160.0" text="Option" />
         </columns>
       </TableView>
-      <Button layoutX="679.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="+ Add" />
+      <Button layoutX="679.0" layoutY="153.0" mnemonicParsing="false" onAction="#addToCartOnAction" prefHeight="25.0" prefWidth="97.0" text="+ Add" />
       <Separator layoutX="14.0" layoutY="164.0" prefHeight="3.0" prefWidth="657.0" />
       <Label layoutX="14.0" layoutY="366.0" text="Total" textFill="#bf0000">
          <font>

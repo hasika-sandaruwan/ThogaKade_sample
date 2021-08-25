@@ -2,10 +2,11 @@ package lk.ijse.POS.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import lk.ijse.POS.model.Customer;
 import lk.ijse.POS.model.Item;
+import lk.ijse.POS.view.tm.CartTM;
 
 import java.sql.SQLException;
 
@@ -18,6 +19,15 @@ public class PlaceOrderFormController {
     public TextField txtDescription;
     public TextField txtQtyOnHand;
     public TextField txtUnitPrice;
+    public TextField txtQtyForOrder;
+
+    public TableView<CartTM> tblCart;
+    public TableColumn colItemCode;
+    public TableColumn colDescription;
+    public TableColumn colUnitPrice;
+    public TableColumn colQTY;
+    public TableColumn colTotal;
+    public TableColumn colOption;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         loadCustomerIds();
@@ -70,4 +80,22 @@ public class PlaceOrderFormController {
         cmbCustomerId.setItems(obList);
     }
 
+    public void addToCartOnAction(ActionEvent actionEvent) {
+
+        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+        int qtyForCustomer = Integer.parseInt(txtQtyForOrder.getText());
+        double total = unitPrice*qtyForCustomer;
+
+        Button btn = new Button("Delete");
+
+        CartTM tm = new CartTM(
+                cmbItemCode.getValue(),
+                txtDescription.getText(),
+                unitPrice,
+                qtyForCustomer,
+                total,
+                btn
+        );
+
+    }
 }
